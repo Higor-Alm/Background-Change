@@ -1,3 +1,16 @@
+// ==UserScript==
+// @name         Plano de Fundo: Zendesk
+// @namespace    http://tampermonkey.net/
+// @version      1.0.1
+// @description  try to take over the world!
+// @author       You
+// @match        https://smileshelp.zendesk.com/*
+// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+// @updateURL    https://raw.githubusercontent.com/Higor-Alm/Background-Change/main/main.js
+// @downloadURL  https://raw.githubusercontent.com/Higor-Alm/Background-Change/main/main.js
+// @grant        none
+// ==/UserScript==
+
 (function() {
     'use strict';
     var iterador = 0;
