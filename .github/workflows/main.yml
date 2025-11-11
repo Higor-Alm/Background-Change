@@ -40,10 +40,14 @@ jobs:
           }
           "
 
+      - name: Configurar autenticação
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+
       - name: Commit e Push
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
           git add main.js
-          git commit -m 'Incrementa versão do UserScript'
+          git commit -m 'Incrementa versão do UserScript' || echo "Nenhuma mudança para commitar"
           git push
