@@ -1,0 +1,49 @@
+name: Update UserScript Version
+
+on:
+  workflow_dispatch: # Permite rodar manualmente
+  push:
+    paths:
+      - 'main.js' # Só roda quando main.js é alterado
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Incrementar versão no UserScript
+        run: |
+          node -e "
+          const fs = require('fs');
+          const path = './main.js';
+          let content = fs.readFileSync(path, 'utf8');
+          const regex = /(@version\\s+)(\\d+\\.\\d+\\.\\d+)/;
+          const match = content.match(regex);
+          if (match) {
+            let [major, minor, patch] = match[2].split('.').map(Number);
+            patch++;
+            const newVersion = \`\${major}.\${minor}.\${patch}\`;
+            content = content.replace(regex, \`$1\${newVersion}\`);
+            fs.writeFileSync(path, content);
+            console.log(\`Versão atualizada para: \${newVersion}\`);
+          } else {
+            console.error('Não encontrou @version no arquivo.');
+            process.exit(1);
+          }
+          "
+
+      - name: Commit e Push
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add main.js
+          git commit -m 'Incrementa versão do UserScript'
+          git push
