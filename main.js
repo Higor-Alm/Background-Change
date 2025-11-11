@@ -2,7 +2,7 @@
 // @name         Plano de Fundo: Zendesk
 // @namespace    http://tampermonkey.net/
 // @version      1.0.2
-// @description  try to take over the world!!
+// @description  try to take over the world!!!
 // @author       You
 // @match        https://smileshelp.zendesk.com/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
